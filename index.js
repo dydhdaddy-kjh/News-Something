@@ -13,7 +13,7 @@ const parser = new Parser({
   headers: {
     "User-Agent":
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36",
-    Accept: "application/rss+xml, application/xml, text/xml, */*",
+    Accept: "*/*",
   },
 });
 
@@ -95,6 +95,45 @@ const SOURCES = {
       economy: "https://feeds.bbci.co.uk/news/business/rss.xml",
       society: "https://feeds.bbci.co.uk/news/uk/rss.xml",
       culture: "https://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml",
+    },
+  },
+
+  pbs: {
+    name: "PBS NewsHour",
+    type: "rss",
+    enabled: true,
+    feeds: {
+      international: "https://www.pbs.org/newshour/feeds/rss/world",
+      politics: "https://www.pbs.org/newshour/feeds/rss/politics",
+      economy: "https://www.pbs.org/newshour/feeds/rss/economy",
+      society: "https://www.pbs.org/newshour/feeds/rss/nation",
+      culture: "https://www.pbs.org/newshour/feeds/rss/arts",
+    },
+  },
+
+  cbc: {
+    name: "CBC News",
+    type: "rss",
+    enabled: true,
+    feeds: {
+      international: "https://www.cbc.ca/webfeed/rss/rss-world",
+      politics: "https://www.cbc.ca/webfeed/rss/rss-politics",
+      economy: "https://www.cbc.ca/webfeed/rss/rss-business",
+      society: "https://www.cbc.ca/webfeed/rss/rss-canada",
+      culture: "https://www.cbc.ca/webfeed/rss/rss-arts",
+    },
+  },
+
+  abcAustralia: {
+    name: "ABC News (Australia)",
+    type: "rss",
+    enabled: true,
+    feeds: {
+      international: "https://www.abc.net.au/news/feed/104217382/rss.xml",
+      politics: "https://www.abc.net.au/news/feed/104217372/rss.xml",
+      economy: "https://www.abc.net.au/news/feed/104217374/rss.xml",
+      society: "https://www.abc.net.au/news/feed/46182/rss.xml",
+      culture: "https://www.abc.net.au/news/feed/103728568/rss.xml",
     },
   },
 };
@@ -590,6 +629,9 @@ app.get("/", (req, res) => {
         <option value="guardian">The Guardian</option>
         <option value="independent">The Independent</option>
         <option value="bbc">BBC News</option>
+        <option value="pbs">PBS NewsHour</option>
+        <option value="cbc">CBC News</option>
+        <option value="abcAustralia">ABC News (Australia)</option>
       </select>
 
       <select id="category">
