@@ -26,36 +26,42 @@ const CATEGORIES = {
 };
 
 const SOURCES = {
-  nyt: {
-    name: "The New York Times",
-    type: "api",
-    enabled: false,
-    note: "NYT API 키 발급 후 연결 예정",
-  },
-
-  washingtonPost: {
-    name: "The Washington Post",
+  abcAustralia: {
+    name: "ABC News (Australia)",
     type: "rss",
     enabled: true,
     feeds: {
-      international: "https://feeds.washingtonpost.com/rss/world",
-      politics: "https://feeds.washingtonpost.com/rss/politics",
-      economy: "https://feeds.washingtonpost.com/rss/business",
-      society: "https://feeds.washingtonpost.com/rss/national",
-      culture: "https://feeds.washingtonpost.com/rss/entertainment",
+      international: "https://www.abc.net.au/news/feed/104217382/rss.xml",
+      politics: "https://www.abc.net.au/news/feed/104217372/rss.xml",
+      economy: "https://www.abc.net.au/news/feed/104217374/rss.xml",
+      society: "https://www.abc.net.au/news/feed/46182/rss.xml",
+      culture: "https://www.abc.net.au/news/feed/103728568/rss.xml",
     },
   },
 
-  lat: {
-    name: "Los Angeles Times",
+  bbc: {
+    name: "BBC News",
     type: "rss",
     enabled: true,
     feeds: {
-      international: "https://www.latimes.com/world-nation/rss2.0.xml",
-      politics: "https://www.latimes.com/politics/rss2.0.xml",
-      economy: "https://www.latimes.com/business/rss2.0.xml",
-      society: "https://www.latimes.com/california/rss2.0.xml",
-      culture: "https://www.latimes.com/entertainment-arts/rss2.0.xml",
+      international: "https://feeds.bbci.co.uk/news/world/rss.xml",
+      politics: "https://feeds.bbci.co.uk/news/politics/rss.xml",
+      economy: "https://feeds.bbci.co.uk/news/business/rss.xml",
+      society: "https://feeds.bbci.co.uk/news/uk/rss.xml",
+      culture: "https://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml",
+    },
+  },
+
+  cbc: {
+    name: "CBC News",
+    type: "rss",
+    enabled: true,
+    feeds: {
+      international: "https://www.cbc.ca/webfeed/rss/rss-world",
+      politics: "https://www.cbc.ca/webfeed/rss/rss-politics",
+      economy: "https://www.cbc.ca/webfeed/rss/rss-business",
+      society: "https://www.cbc.ca/webfeed/rss/rss-canada",
+      culture: "https://www.cbc.ca/webfeed/rss/rss-arts",
     },
   },
 
@@ -85,17 +91,24 @@ const SOURCES = {
     },
   },
 
-  bbc: {
-    name: "BBC News",
+  lat: {
+    name: "Los Angeles Times",
     type: "rss",
     enabled: true,
     feeds: {
-      international: "https://feeds.bbci.co.uk/news/world/rss.xml",
-      politics: "https://feeds.bbci.co.uk/news/politics/rss.xml",
-      economy: "https://feeds.bbci.co.uk/news/business/rss.xml",
-      society: "https://feeds.bbci.co.uk/news/uk/rss.xml",
-      culture: "https://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml",
+      international: "https://www.latimes.com/world-nation/rss2.0.xml",
+      politics: "https://www.latimes.com/politics/rss2.0.xml",
+      economy: "https://www.latimes.com/business/rss2.0.xml",
+      society: "https://www.latimes.com/california/rss2.0.xml",
+      culture: "https://www.latimes.com/entertainment-arts/rss2.0.xml",
     },
+  },
+
+  nyt: {
+    name: "The New York Times",
+    type: "api",
+    enabled: false,
+    note: "NYT API 키 발급 후 연결 예정",
   },
 
   pbs: {
@@ -111,29 +124,16 @@ const SOURCES = {
     },
   },
 
-  cbc: {
-    name: "CBC News",
+  washingtonPost: {
+    name: "The Washington Post",
     type: "rss",
     enabled: true,
     feeds: {
-      international: "https://www.cbc.ca/webfeed/rss/rss-world",
-      politics: "https://www.cbc.ca/webfeed/rss/rss-politics",
-      economy: "https://www.cbc.ca/webfeed/rss/rss-business",
-      society: "https://www.cbc.ca/webfeed/rss/rss-canada",
-      culture: "https://www.cbc.ca/webfeed/rss/rss-arts",
-    },
-  },
-
-  abcAustralia: {
-    name: "ABC News (Australia)",
-    type: "rss",
-    enabled: true,
-    feeds: {
-      international: "https://www.abc.net.au/news/feed/104217382/rss.xml",
-      politics: "https://www.abc.net.au/news/feed/104217372/rss.xml",
-      economy: "https://www.abc.net.au/news/feed/104217374/rss.xml",
-      society: "https://www.abc.net.au/news/feed/46182/rss.xml",
-      culture: "https://www.abc.net.au/news/feed/103728568/rss.xml",
+      international: "https://feeds.washingtonpost.com/rss/world",
+      politics: "https://feeds.washingtonpost.com/rss/politics",
+      economy: "https://feeds.washingtonpost.com/rss/business",
+      society: "https://feeds.washingtonpost.com/rss/national",
+      culture: "https://feeds.washingtonpost.com/rss/entertainment",
     },
   },
 };
@@ -623,15 +623,15 @@ app.get("/", (req, res) => {
     <div class="controls-inner">
       <select id="source">
         <option value="all">전체 매체</option>
-        <option value="nyt">NYT - 준비 중</option>
-        <option value="washingtonPost">Washington Post</option>
-        <option value="lat">Los Angeles Times</option>
+        <option value="abcAustralia">ABC News (Australia)</option>
+        <option value="bbc">BBC News</option>
+        <option value="cbc">CBC News</option>
         <option value="guardian">The Guardian</option>
         <option value="independent">The Independent</option>
-        <option value="bbc">BBC News</option>
+        <option value="lat">Los Angeles Times</option>
+        <option value="nyt">NYT - 준비 중</option>
         <option value="pbs">PBS NewsHour</option>
-        <option value="cbc">CBC News</option>
-        <option value="abcAustralia">ABC News (Australia)</option>
+        <option value="washingtonPost">Washington Post</option>
       </select>
 
       <select id="category">
